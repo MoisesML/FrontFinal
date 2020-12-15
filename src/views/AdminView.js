@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { informacionPersona } from "../Services/PersonaServices";
 import Loading from "../components/Loading/Loading";
 
