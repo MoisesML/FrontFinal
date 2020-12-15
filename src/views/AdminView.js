@@ -48,8 +48,8 @@ export default function AdminView() {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <Link class="dropdown-item" href="#">Settings</Link>
-                        <Link class="dropdown-item" href="#">Activity Log</Link>
+                        <Link class="dropdown-item" to="/">Settings</Link>
+                        <Link class="dropdown-item" to="/">Activity Log</Link>
                         <div class="dropdown-divider"></div>
                         <Link class="dropdown-item" to="/login">Logout</Link> 
                     </div>
