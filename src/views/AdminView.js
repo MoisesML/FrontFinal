@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 // import { Link } from 'react-router-dom';
 import { informacionPersona } from "../Services/PersonaServices";
-import Loading from "../components/Loading/Loading";
+import Loading from "../components/Loading";
 
 export default function AdminView() {
   const [cargando, setCargando] = useState(true);

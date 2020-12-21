@@ -6,6 +6,7 @@ import InicioView from './views/InicioView'
 import LoginView from './views/LoginView'
 import PruebasView from './views/PruebasView'
 import RegistroView from './views/RegistroView'
+import ResultadoView from './views/ResultadoView'
 
 export default function routes() {
     return (
@@ -15,6 +16,7 @@ export default function routes() {
             <Route exact path='/admin' component={AdminView} />
             <Route exact path='/registro' component={RegistroView} />
             <Route exact path='/pruebas' component={PruebasView} />
+            <Route exact path='/busqueda/:puesto/:lugar' component={ResultadoView} />
         </Fragment>
     )
 }

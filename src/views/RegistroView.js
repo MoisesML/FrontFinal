@@ -1,5 +1,5 @@
 import React from 'react';
-import FormPersona from '../components/FormPersona/FormPersona';
+import FormPersona from '../components/FormPersona';
 import { registrarPersona } from '../Services/AuthServices';
 
 export default function RegistroView() {

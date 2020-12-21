@@ -1,10 +1,22 @@
 import axios from 'axios';
 
+const URL = 'http://127.0.0.1:5000'
+
 const informacionPersona = async (id) => {
     try {
-        const URL = `http://127.0.0.1:5000/persona/${id}`;
-        let informacion = axios.get(URL);
+        const URI = `${URL}/persona/${id}`;
+        let informacion = await axios.get(URI);
         return informacion;
+    } catch (error) {
+        return error;
+    }
+}
+
+const traerPersonas = async () => {
+    try {
+        const URI = `${URL}/personas/`;
+        let { data } = await axios.get(URI);
+        return data.content
     } catch (error) {
         return error;
     }
@@ -12,4 +24,5 @@ const informacionPersona = async (id) => {
 
 export {
     informacionPersona,
+    traerPersonas,
 }
