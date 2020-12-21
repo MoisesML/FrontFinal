@@ -17,6 +17,7 @@ export default function ResultadoView(props) {
 
   useEffect(() => {
     getAnuncios();
+    // eslint-disable-next-line
   }, []);
 
   return (

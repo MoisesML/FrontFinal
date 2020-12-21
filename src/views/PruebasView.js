@@ -15,6 +15,7 @@ export default function PruebasView() {
 
   useEffect(() => {
     getPersonas();
+    // eslint-disable-next-line
   }, []);
 
   return (
