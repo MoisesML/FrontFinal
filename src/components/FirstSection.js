@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Carrusel from '../components/Carrusel';
 import Buscador from '../components/Buscador';
 // import 

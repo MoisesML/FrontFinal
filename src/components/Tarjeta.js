@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import './css/Tarjeta.css'
 
 export default function Tarjeta({information, dato}) {
-  if (dato == 'persona') {
+  if (dato === 'persona') {
     let { per_nomb, per_apel } = information
     return (
         <Card className="tarjeta">
