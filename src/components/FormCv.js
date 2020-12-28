@@ -23,6 +23,7 @@ export default function FormCv({ informacion }) {
 
   useEffect(() => {
     traerValores();
+    // eslint-disable-next-line
   }, [informacion]);
 
   return (

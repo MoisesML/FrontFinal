@@ -5,7 +5,7 @@ import { SessionContext } from "../context/SessionContext";
 import { anunciosContratados } from "../Services/AnuncioServices";
 
 export default function InicioView() {
-  const { user, setSessionUser } = useContext(SessionContext);
+  const { setSessionUser } = useContext(SessionContext);
   const [anuncios, setAnuncios] = useState([]);
   const [cargando, setCargando] = useState(true);
 
