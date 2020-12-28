@@ -1,12 +1,19 @@
 import React, { Fragment } from "react";
 import { useForm } from "react-hook-form";
 
-export default function FormRegister({Registrar}) {
+export default function FormRegister({ Registrar }) {
   let { register, handleSubmit } = useForm();
 
   const Register = (data, e) => {
-      Registrar(data);
-      e.target.reset();
+    let objAdicional = {
+      per_dire: "Ingrese su dirección",
+      per_dni: "Ingrese su DNI",
+      per_fnac: "",
+    };
+    let objPersona = { ...data, ...objAdicional };
+    console.log(objPersona);
+    Registrar(objPersona);
+    e.target.reset();
   };
   return (
     <Fragment>

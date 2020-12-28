@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Navbar, Nav, NavDropdown, Button, Dropdown, ButtonGroup } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import "./css/BarNaveg.css";
+import { SessionContext } from '../context/SessionContext';
 
 export default function BarNaveg() {
+  let id = sessionStorage.getItem("id");
+  const { user, setSessionUser, nombreCompleto, setNombreCompleto } = useContext(SessionContext);
   const history = useHistory();
-
-  const token = sessionStorage.getItem("token");
 
   const cerrarSesion = () => {
     history.push("/");
-    sessionStorage.setItem("token", null);
+    sessionStorage.setItem("token", "null");
+    sessionStorage.setItem("id", "null");
+    sessionStorage.setItem("nombre", null);
+    setNombreCompleto("null");
+    setSessionUser("null");
     alert('Sesion cerrada exitosamente');
   };
+
+  useEffect(() => {
+    setSessionUser(sessionStorage.getItem("token"));
+    // eslint-disable-next-line
+  },[]);
+
+  useEffect(() => {
+    setNombreCompleto(sessionStorage.getItem("nombre"));
+    // eslint-disable-next-line
+  }, [user])
 
   return (
     <Navbar className="navegador" expand="lg">
@@ -30,6 +45,9 @@ export default function BarNaveg() {
             </Link>
             <Link className="hyperv" to="/pruebas">
               pruebas
+            </Link>
+            <Link className="hyperv" to={"editar/cv/"+id+"/"} >
+              editarcv
             </Link>
             <NavDropdown
               title="Dropddsdsown"
@@ -50,13 +68,13 @@ export default function BarNaveg() {
         </Navbar.Collapse>
         <Link to="/"><button className="btn btn-light ml-4">Soy empresa</button></Link>
         <Button variant="outline-light ml-4">Publicar gratis</Button>
-        {token === null ? (
+        {user === "null" || user === null ? (
           <Link to="/login">
             <button className="btn btn-light ml-4">Iniciar sesión</button>
           </Link>
         ) : (
           <Dropdown as={ButtonGroup}>
-            <Button variant="success">Usuario</Button>
+            <Button className="ml-4" variant="success"><Link to="/admin">{nombreCompleto}</Link></Button>
             <Dropdown.Toggle
               split
               variant="success"

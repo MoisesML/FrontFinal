@@ -1,47 +1,40 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 
-export default function Buscador() {
+export default function FormFono({subirFono}) {
   let { register, handleSubmit } = useForm();
-  const history = useHistory();
 
-  const Buscar = async (objBusqueda) => {
-    let { puesto, lugar } = objBusqueda;
-    if (lugar === "") {
-      lugar = "all";
-    }
-    // console.log(data);
-    history.push(`/busqueda/${puesto}/${lugar}`);
+  const capturarFonos = (objFonos) => {
+    console.log(objFonos)
   };
 
   return (
-    <div className="mb-4">
-      <Form onSubmit={handleSubmit(Buscar)} inline>
-        <i className="fas fa-search mx-2"></i>
+    <div className="row justify-content-center my-3">
+      <Form onSubmit={handleSubmit(capturarFonos)}>
         <Form.Group controlId="formBasicEmail" className="mx-2">
+          <Form.Label>N° de telefono</Form.Label>
           <Form.Control
-            name="puesto"
+            name="fono_num"
             type="text"
-            placeholder="Puesto, empresa o palabra clave"
+            placeholder="Ingrese su número telefónico"
             required="required"
             ref={register({ required: true })}
           />
         </Form.Group>
-        <i className="fas fa-map-marker-alt mx-2"></i>
         <Form.Group controlId="formBasicPassword" className="mx-2">
+          <Form.Label>Operador</Form.Label>
           <Form.Control
-            name="lugar"
+            name="fono_ope"
             type="text"
-            placeholder="Todo el país"
+            placeholder="Ingrese su operador"
             ref={register({ required: false })}
           />
         </Form.Group>
         <Button variant="primary" type="submit" className="mx-2">
-          Buscar trabajos
+          Agregar
         </Button>
       </Form>
     </div>
   );
-} 
+}

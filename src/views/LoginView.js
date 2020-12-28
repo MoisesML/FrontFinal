@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { loginPersona } from "../Services/AuthServices";
 import { registrarPersona } from "../Services/AuthServices";
+import { SessionContext } from '../context/SessionContext';
 import FormLogin from "../components/FormLogin";
 import FormRegister from "../components/FormRegister";
 import Swal from "sweetalert2";
 
 export default function LoginView() {
   const history = useHistory();
+  const { setSessionUser, setNombreCompleto, setId } = useContext(SessionContext);
 
   const Ingresar = async (objPersona) => {
     let { data } = await loginPersona(objPersona);
     let { message, ok, content } = data;
+    let { nombre, id, token } = content;
+
     if (ok) {
       Swal.fire({
         title: "Iniciar sesión",
@@ -21,7 +25,12 @@ export default function LoginView() {
         timer: 2000,
       });
       history.push("/admin");
-      sessionStorage.setItem("token", content);
+      sessionStorage.setItem("nombre", nombre);
+      setNombreCompleto(nombre);
+      sessionStorage.setItem("id", id);
+      setId(id)
+      sessionStorage.setItem("token", token);
+      setSessionUser(token);
     } else {
       Swal.fire({
         title: "Iniciar sesión",
@@ -31,6 +40,7 @@ export default function LoginView() {
         timer: 2000,
       });
       sessionStorage.setItem("token", null);
+      sessionStorage.setItem("nombre", null);
     }
   };
 
