@@ -17,7 +17,7 @@ export default function EditarCurriculumView(props) {
   };
 
   const Actualizar = async (id, objPersona) => {
-    let { message, ok, content } = await actualizarPersona(id, objPersona);
+    let { message, ok } = await actualizarPersona(id, objPersona);
     if (ok) {
       Swal.fire({
         title: "Actualizar datos",
