@@ -30,7 +30,7 @@ const crearAnuncio = async (objAnuncio) => {
             "Content-Type":"application/json",
         };
         let { data } = await axios.post(URI, objAnuncio, { headers });
-        return data.content
+        return data
     } catch (error) {
         return error
     }

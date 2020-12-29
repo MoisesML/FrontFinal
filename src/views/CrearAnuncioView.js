@@ -9,6 +9,7 @@ export default function CrearAnuncioView() {
 
     const publicarAnuncio = async (objAnuncio) => {
         let data = await crearAnuncio(objAnuncio);
+        console.log(data)
         let { message, ok } = data;
         if (ok) {
             Swal.fire({
