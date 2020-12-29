@@ -1,64 +1,65 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
 
-export default function FormPersona({ crearPersona }) {
+export default function FormPersona({ Registrar }) {
   let { register, handleSubmit } = useForm();
-  const history = useHistory();
 
-  const Registrar = async (objPersona) => {
-    let { ok, message } = await crearPersona(objPersona);
-    if (ok) {
-        Swal.fire({
-            title : 'Nuevo registro',
-            text : message,
-            icon : "success",  
-            showConfirmButton : false,
-            timer : 2000
-        });
-        history.push("/login");
-      } else {
-        Swal.fire({
-          title : 'Nuevo registro',
-          text : message,
-          icon : "error",
-          showConfirmButton : false,
-          timer : 2000
-        });
-      }
+  const Register = (objEmpresa, e) => {
+    Registrar(objEmpresa);
+    // console.log(objEmpresa);
+    e.target.reset();
   };
 
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <form className="col-sm-6" onSubmit={handleSubmit(Registrar)}>
+        <form className="col-sm-6" onSubmit={handleSubmit(Register)}>
           <div className="form-group">
-            <label>Nombre</label>
+            <label>Nombre empresa</label>
             <input
               type="text"
               className="form-control"
-              name="per_nomb"
+              name="emp_nomb"
               placeholder="Ingrese su nombre"
               ref={register({ required: true })}
             />
           </div>
           <div className="form-group">
-            <label>Apellido</label>
+            <label>Razon Social</label>
             <input
               type="text"
               className="form-control"
-              name="per_apel"
+              name="emp_rsoc"
               placeholder="Ingrese su apellido"
               ref={register({ required: true })}
             />
           </div>
           <div className="form-group">
-            <label>Correo</label>
+            <label>RUC</label>
+            <input
+              type="text"
+              className="form-control"
+              name="emp_ruc"
+              placeholder="Ingrese su correo"
+              ref={register({ required: true })}
+            />
+          </div>
+          <div className="form-group">
+            <label>Rubro</label>
+            <input
+              type="text"
+              className="form-control"
+              name="emp_rubr"
+              placeholder="Ingrese su correo"
+              ref={register({ required: true })}
+            />
+          </div>
+          <div className="form-group">
+            <label>Correo Electronico</label>
             <input
               type="email"
               className="form-control"
-              name="per_emal"
+              name="emp_emal"
               placeholder="Ingrese su correo"
               ref={register({ required: true })}
             />

@@ -40,15 +40,16 @@ export default function BarNaveg() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto hyperv">
-            <Link className="hyperv" to="/registro">
+            <Link className="mx-1 hyperv" to="/registro">
               Registro
             </Link>
-            <Link className="hyperv" to="/pruebas">
+            <Link className="mx-1 hyperv" to="/pruebas">
               pruebas
             </Link>
-            <Link className="hyperv" to={"editar/cv/"+id+"/"} >
+            <Link className="mx-1 hyperv" to={"editar/cv/"+id+"/"} >
               editarcv
             </Link>
+            <Link className="mx-1 hyperv" to="/anuncio">Anuncio</Link>
             <NavDropdown
               title="Dropddsdsown"
               id="basic-nav-dropdown"
@@ -66,7 +67,7 @@ export default function BarNaveg() {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-        <Link to="/"><button className="btn btn-light ml-4">Soy empresa</button></Link>
+        <Link to="/login/empresa" className="btn btn-light ml-4">Soy empresa</Link>
         <Button variant="outline-light ml-4">Publicar gratis</Button>
         {user === "null" || user === null ? (
           <Link to="/login">

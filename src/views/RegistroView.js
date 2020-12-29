@@ -1,5 +1,5 @@
 import React from 'react';
-import FormPersona from '../components/FormPersona';
+import FormEmpresa from '../components/FormEmpresa';
 import { registrarPersona } from '../Services/AuthServices';
 
 export default function RegistroView() {
@@ -10,7 +10,7 @@ export default function RegistroView() {
 
     return (
         <div className="container">
-            <FormPersona crearPersona = {crearPersona} />
+            <FormEmpresa crearPersona = {crearPersona} />
         </div>
     )
 }

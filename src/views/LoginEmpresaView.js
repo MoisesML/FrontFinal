@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { loginPersona, registrarPersona } from "../Services/AuthServices";
-import { SessionContext } from '../context/SessionContext';
-import FormLogin from "../components/FormLogin";
-import FormRegister from "../components/FormRegister";
+import FormEmpresa from "../components/FormEmpresa";
+import FormLoginEmpresa from "../components/FormLoginEmpresa";
+import { SessionContext } from "../context/SessionContext";
+import { loginEmpresa, registrarEmpresa } from "../Services/AuthServices";
 import Swal from "sweetalert2";
 
-export default function LoginView() {
+export default function LoginEmpresaView() {
   const history = useHistory();
-  const { setSessionUser, setNombreCompleto, setId } = useContext(SessionContext);
+  const { setSessionUser, setNombreCompleto, setId } = useContext(
+    SessionContext
+  );
 
   const Ingresar = async (objPersona) => {
-    let { data } = await loginPersona(objPersona);
+    let { data } = await loginEmpresa(objPersona);
     let { message, ok, content } = data;
     let { nombre, id, token } = content;
 
@@ -27,7 +29,7 @@ export default function LoginView() {
       sessionStorage.setItem("nombre", nombre);
       setNombreCompleto(nombre);
       sessionStorage.setItem("id", id);
-      setId(id)
+      setId(id);
       sessionStorage.setItem("token", token);
       setSessionUser(token);
     } else {
@@ -44,7 +46,7 @@ export default function LoginView() {
   };
 
   const Registrar = async (objPersona) => {
-    let { data } = await registrarPersona(objPersona);
+    let { data } = await registrarEmpresa(objPersona);
     let { message, ok } = data;
     if (ok) {
       Swal.fire({
@@ -69,10 +71,10 @@ export default function LoginView() {
     <div className="container py-5">
       <div className="row">
         <div className="col-6">
-          <FormLogin Ingresar={Ingresar} />
+          <FormLoginEmpresa IngresarEmpresa={Ingresar} />
         </div>
         <div className="col-sm-6">
-          <FormRegister Registrar={Registrar} />
+          <FormEmpresa Registrar={Registrar} />
         </div>
       </div>
     </div>

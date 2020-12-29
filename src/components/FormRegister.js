@@ -15,6 +15,7 @@ export default function FormRegister({ Registrar }) {
     Registrar(objPersona);
     e.target.reset();
   };
+  
   return (
     <Fragment>
       <div className="d-flex flex-column align-items-center mb-4">

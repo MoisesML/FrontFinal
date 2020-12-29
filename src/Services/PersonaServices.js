@@ -34,15 +34,26 @@ const subirImagen = (imagen, refStorage) => {
         reject(error);
       },
       () => {
-        tarea.snapshot.ref.getDownLoadURL()
-        .then((urlImagen) => {
+        tarea.snapshot.ref
+          .getDownLoadURL()
+          .then((urlImagen) => {
             console.log(urlImagen);
             resolve(urlImagen);
-        })
-        .catch((error) => reject(error))
+          })
+          .catch((error) => reject(error));
       }
     );
   });
 };
 
-export { informacionPersona, traerPersonas, subirImagen };
+const actualizarPersona = async (id, objPersona) => {
+  try {
+    const URI = `${URL}/editar/${id}`;
+    let { data } = await axios.put(URI, {objPersona});
+    return data.content;
+  } catch (error) {
+    return error;
+  }
+};
+
+export { informacionPersona, traerPersonas, subirImagen, actualizarPersona };

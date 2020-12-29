@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function FormCv({ informacion }) {
-  console.log(informacion);
+export default function FormCv({ informacion, Actualizar, id }) {
+  // console.log(informacion);
   let { register, handleSubmit, setValue } = useForm();
 
-  const Actualizar = (objCv) => {
-    console.log(objCv);
+  const actualizar = (objCv) => {
+    console.log(objCv, id)
+    Actualizar(id, objCv)
   };
 
   let traerValores = () => {
@@ -28,7 +29,7 @@ export default function FormCv({ informacion }) {
 
   return (
     <div className="row justify-content-center my-3">
-      <form className="col-sm-6" onSubmit={handleSubmit(Actualizar)}>
+      <form className="col-sm-6" onSubmit={handleSubmit(actualizar)}>
         <div className="form-group">
           <label>Nombre</label>
           <input
@@ -81,7 +82,7 @@ export default function FormCv({ informacion }) {
             id="per_fnac"
             name="per_fnac"
             placeholder="Ingrese su dni"
-            ref={register({ required: true })}
+            ref={register({ required: false })}
           />
         </div>
         <div className="form-group">
@@ -92,7 +93,7 @@ export default function FormCv({ informacion }) {
             id="per_dire"
             name="per_dire"
             placeholder="Ingrese su dni"
-            ref={register({ required: true })}
+            ref={register({ required: false })}
           />
         </div>
         <button className="btn btn-primary" type="submit">

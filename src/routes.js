@@ -2,8 +2,10 @@ import React, { Fragment } from 'react'
 import {Route} from 'react-router-dom'
 
 import AdminView from './views/AdminView'
+import CrearAnuncioView from './views/CrearAnuncioView'
 import EditarCurriculumView from './views/EditarCurriculumView'
 import InicioView from './views/InicioView'
+import LoginEmpresaView from './views/LoginEmpresaView'
 import LoginView from './views/LoginView'
 import PruebasView from './views/PruebasView'
 import RegistroView from './views/RegistroView'
@@ -19,6 +21,8 @@ export default function routes() {
             <Route exact path='/pruebas' component={PruebasView} />
             <Route exact path='/busqueda/:puesto/:lugar' component={ResultadoView} />
             <Route exact path='/editar/cv/:id' component={EditarCurriculumView} />
+            <Route exact path='/anuncio' component={CrearAnuncioView} />
+            <Route exact path='/login/empresa' component={LoginEmpresaView} />
         </Fragment>
     )
 }
