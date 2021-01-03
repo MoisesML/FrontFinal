@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { postularAnuncio } from "../Services/PersonaServices";
 
 export default function FormPostulacion({id}) {
-    const idp = sessionStorage.getItem("id");
+    // const idp = sessionStorage.getItem("id");
     let { register, handleSubmit } = useForm();
 
     const registrarPostulacion = async (objPostulante) => {

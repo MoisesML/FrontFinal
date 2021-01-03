@@ -6,13 +6,10 @@ import { anunciosContratados } from "../Services/AnuncioServices";
 
 export default function InicioView() {
   const {
-    user,
     setSessionUser,
-    nombreCompleto,
     setNombreCompleto,
     id,
     setId,
-    tipo,
     setTipo,
   } = useContext(SessionContext);
   let id2 = sessionStorage.getItem("id");

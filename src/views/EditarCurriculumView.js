@@ -15,7 +15,6 @@ export default function EditarCurriculumView(props) {
     setNombreCompleto,
     id,
     setId,
-    tipo,
     setTipo,
   } = useContext(SessionContext);
   const history = useHistory();

@@ -6,9 +6,9 @@ export default function TablaItem({ key, dato, tipo }) {
     let {
       anun_cont,
       anun_desc,
-      anun_emId,
-      anun_empr,
-      anun_esco,
+      // anun_emId,
+      // anun_empr,
+      // anun_esco,
       anun_esta,
       anun_post,
       anun_psto,
@@ -34,7 +34,7 @@ export default function TablaItem({ key, dato, tipo }) {
       </tr>
     );
   } else if (tipo === "cv") {
-    let { post_cv, post_id, _id } = dato;
+    let { post_cv, post_id } = dato;
     // const detalle = `/anuncio/detalle/${_id}`;
     console.log(key);
 

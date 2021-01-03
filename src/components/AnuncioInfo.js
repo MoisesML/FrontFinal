@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, Fragment } from "react";
 import Tabla from "./Tabla";
-import Loading from "./Loading";
+// import Loading from "./Loading";
 import ModalForm from "./ModalForm";
 import FormPostulacion from "./FormPostulacion";
 import { SessionContext } from "../context/SessionContext";
@@ -38,12 +38,12 @@ export default function AnuncioInfo({ informacion, idAnuncio }) {
 
   if (informacion !== null) {
     const {
-      anun_cont,
-      anun_desc,
-      anun_emId,
-      anun_empr,
-      anun_esco,
-      anun_esta,
+      // anun_cont,
+      // anun_desc,
+      // anun_emId,
+      // anun_empr,
+      // anun_esco,
+      // anun_esta,
       anun_post,
       anun_psto,
     } = informacion;

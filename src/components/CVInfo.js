@@ -15,7 +15,7 @@ export default function CVInfo({ nombreCompleto, direccion, dni }) {
         <div className="col justify-items-center">
           Edad:
           <br />
-          <b>{"edad" + " " + "años"}</b>
+          <b>{"edad años"}</b>
         </div>
         <div className="col justify-items-center">
           DNI:
