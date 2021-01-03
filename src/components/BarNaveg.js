@@ -5,29 +5,28 @@ import "./css/BarNaveg.css";
 import { SessionContext } from '../context/SessionContext';
 
 export default function BarNaveg() {
-  let id = sessionStorage.getItem("id");
-  const { user, setSessionUser, nombreCompleto, setNombreCompleto } = useContext(SessionContext);
+  const { user, setSessionUser, nombreCompleto, setNombreCompleto, setTipo, id, setId } = useContext(SessionContext);
   const history = useHistory();
 
   const cerrarSesion = () => {
-    history.push("/");
-    sessionStorage.setItem("token", "null");
-    sessionStorage.setItem("id", "null");
+    sessionStorage.setItem("token", null);
+    sessionStorage.setItem("id", null);
     sessionStorage.setItem("nombre", null);
-    setNombreCompleto("null");
-    setSessionUser("null");
+    sessionStorage.setItem("tipo", null);
+    setNombreCompleto(null);
+    setSessionUser(null);
+    setTipo(null);
+    setId(null);
     alert('Sesion cerrada exitosamente');
+    return history.push("/");
   };
 
   useEffect(() => {
-    setSessionUser(sessionStorage.getItem("token"));
-    // eslint-disable-next-line
-  },[]);
-
-  useEffect(() => {
-    setNombreCompleto(sessionStorage.getItem("nombre"));
-    // eslint-disable-next-line
-  }, [user])
+    if (user === null) {
+      setSessionUser(sessionStorage.getItem("token"));
+      setNombreCompleto(sessionStorage.getItem("nombre"));
+    }
+  })
 
   return (
     <Navbar className="navegador" expand="lg">

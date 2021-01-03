@@ -1,21 +1,31 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { loginPersona, registrarPersona } from "../Services/AuthServices";
-import { SessionContext } from '../context/SessionContext';
+import { SessionContext } from "../context/SessionContext";
 import FormLogin from "../components/FormLogin";
 import FormRegister from "../components/FormRegister";
 import Swal from "sweetalert2";
 
 export default function LoginView() {
   const history = useHistory();
-  const { setSessionUser, setNombreCompleto, setId } = useContext(SessionContext);
+  const { setSessionUser, setNombreCompleto, setId, setTipo } = useContext(
+    SessionContext
+  );
 
   const Ingresar = async (objPersona) => {
     let { data } = await loginPersona(objPersona);
     let { message, ok, content } = data;
-    let { nombre, id, token } = content;
 
     if (ok) {
+      let { nombre, id, tipo, token } = content;
+      setId(id);
+      setTipo(tipo);
+      setSessionUser(token);
+      setNombreCompleto(nombre);
+      sessionStorage.setItem("id", id);
+      sessionStorage.setItem("tipo", tipo);
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("nombre", nombre);
       Swal.fire({
         title: "Iniciar sesión",
         text: message,
@@ -23,14 +33,12 @@ export default function LoginView() {
         showConfirmButton: false,
         timer: 2000,
       });
-      history.push("/admin");
-      sessionStorage.setItem("nombre", nombre);
-      setNombreCompleto(nombre);
-      sessionStorage.setItem("id", id);
-      setId(id)
-      sessionStorage.setItem("token", token);
-      setSessionUser(token);
+      return history.push("/admin");
     } else {
+      sessionStorage.setItem("token", null);
+      sessionStorage.setItem("nombre", null);
+      sessionStorage.setItem("id", null);
+      sessionStorage.setItem("tipo", null);
       Swal.fire({
         title: "Iniciar sesión",
         text: message,
@@ -38,8 +46,6 @@ export default function LoginView() {
         showConfirmButton: false,
         timer: 2000,
       });
-      sessionStorage.setItem("token", null);
-      sessionStorage.setItem("nombre", null);
     }
   };
 
@@ -69,10 +75,10 @@ export default function LoginView() {
     <div className="container py-5">
       <div className="row">
         <div className="col-6">
-          <FormLogin Ingresar={Ingresar} />
+          <FormLogin Ingresar={Ingresar} tipo="persona"/>
         </div>
         <div className="col-sm-6">
-          <FormRegister Registrar={Registrar} />
+          <FormRegister Registrar={Registrar} tipo="persona"/>
         </div>
       </div>
     </div>

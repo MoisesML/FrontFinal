@@ -34,10 +34,21 @@ const crearAnuncio = async (objAnuncio) => {
     } catch (error) {
         return error
     }
-}
+};
+
+const traerAnuncio = async (id) => {
+    try {
+        const URI = `${URL}/anuncio/${id}`;
+        let anuncio = await axios.get(URI);
+        return anuncio;
+    } catch (error) {
+        return error;
+    }
+};
 
 export {
     buscarAnuncios,
     anunciosContratados,
     crearAnuncio,
+    traerAnuncio,
 }

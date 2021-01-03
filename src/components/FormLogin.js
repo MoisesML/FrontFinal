@@ -1,11 +1,15 @@
 import React, { Fragment } from "react";
 import { useForm } from "react-hook-form";
 
-export default function FormLogin({Ingresar}) {
+export default function FormLogin({Ingresar, IngresarEmpresa, tipo}) {
   let { register, handleSubmit } = useForm();
 
   const Login = data => {
-    Ingresar(data);
+    if (tipo === "persona") {
+      Ingresar(data);
+    } else if (tipo === "empresa") {
+      IngresarEmpresa(data);
+    }
   };
 
   return (

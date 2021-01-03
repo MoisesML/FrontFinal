@@ -1,9 +1,11 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./css/Item.css";
 
 export default function CarruselItem({ anun }) {
-  let { anun_empr, anun_psto } = anun;
+  let { anun_empr, anun_psto, _id } = anun;
+  const detalle = `/anuncio/detalle/${_id}`;
 
   return (
     <div>
@@ -23,7 +25,7 @@ export default function CarruselItem({ anun }) {
             <p className="ejemplo2">
               Descripcion del trabajo
             </p>
-            <button className="btn btn-light">Postularme</button>
+            <Link to={detalle}><button className="btn btn-light">Postularme</button></Link>
           </div>
         </div>
       </Carousel.Caption>

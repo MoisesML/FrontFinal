@@ -5,9 +5,23 @@ import { SessionContext } from "../context/SessionContext";
 import { anunciosContratados } from "../Services/AnuncioServices";
 
 export default function InicioView() {
-  const { setSessionUser } = useContext(SessionContext);
+  const {
+    user,
+    setSessionUser,
+    nombreCompleto,
+    setNombreCompleto,
+    id,
+    setId,
+    tipo,
+    setTipo,
+  } = useContext(SessionContext);
+  let id2 = sessionStorage.getItem("id");
+  let tipo2 = sessionStorage.getItem("tipo");
+  let token2 = sessionStorage.getItem("token");
+  let nombre2 = sessionStorage.getItem("nombre");
   const [anuncios, setAnuncios] = useState([]);
   const [cargando, setCargando] = useState(true);
+  console.log(id2, id);
 
   const getAnuncios = async () => {
     let anuncios = await anunciosContratados();
@@ -15,9 +29,24 @@ export default function InicioView() {
     setCargando(false);
   };
 
+  const verificarContext = () => {
+    if (id2 === null) {
+      sessionStorage.setItem("token", null);
+      sessionStorage.setItem("nombre", null);
+      sessionStorage.setItem("id", null);
+      sessionStorage.setItem("tipo", null);
+    };
+    if (id === null) {
+      setId(id2);
+      setTipo(tipo2);
+      setSessionUser(token2);
+      setNombreCompleto(nombre2);
+    }
+  };
+
   useEffect(() => {
+    verificarContext();
     getAnuncios();
-    setSessionUser(sessionStorage.getItem("token"));
     // eslint-disable-next-line
   }, []);
 

@@ -1,23 +1,31 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import FormEmpresa from "../components/FormEmpresa";
-import FormLoginEmpresa from "../components/FormLoginEmpresa";
+import FormLogin from "../components/FormLogin";
 import { SessionContext } from "../context/SessionContext";
 import { loginEmpresa, registrarEmpresa } from "../Services/AuthServices";
 import Swal from "sweetalert2";
+import FormRegister from "../components/FormRegister";
 
 export default function LoginEmpresaView() {
   const history = useHistory();
-  const { setSessionUser, setNombreCompleto, setId } = useContext(
+  const { setSessionUser, setNombreCompleto, setId, setTipo } = useContext(
     SessionContext
   );
 
   const Ingresar = async (objPersona) => {
     let { data } = await loginEmpresa(objPersona);
     let { message, ok, content } = data;
-    let { nombre, id, token } = content;
-
+    
     if (ok) {
+      let { nombre, id, tipo, token } = content;
+      setId(id);
+      setTipo(tipo);
+      setSessionUser(token);
+      setNombreCompleto(nombre);
+      sessionStorage.setItem("id", id);
+      sessionStorage.setItem("tipo", tipo);
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("nombre", nombre);
       Swal.fire({
         title: "Iniciar sesión",
         text: message,
@@ -25,13 +33,7 @@ export default function LoginEmpresaView() {
         showConfirmButton: false,
         timer: 2000,
       });
-      history.push("/admin");
-      sessionStorage.setItem("nombre", nombre);
-      setNombreCompleto(nombre);
-      sessionStorage.setItem("id", id);
-      setId(id);
-      sessionStorage.setItem("token", token);
-      setSessionUser(token);
+      return history.push("/admin");
     } else {
       Swal.fire({
         title: "Iniciar sesión",
@@ -71,10 +73,10 @@ export default function LoginEmpresaView() {
     <div className="container py-5">
       <div className="row">
         <div className="col-6">
-          <FormLoginEmpresa IngresarEmpresa={Ingresar} />
+          <FormLogin IngresarEmpresa={Ingresar} tipo="empresa" />
         </div>
         <div className="col-sm-6">
-          <FormEmpresa Registrar={Registrar} />
+          <FormRegister Registrar={Registrar} tipo="empresa"/>
         </div>
       </div>
     </div>

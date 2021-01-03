@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// const URL = 'http://127.0.0.1:5000';
 const URL = "https://projecto-codigo-final.herokuapp.com";
 
 const informacionPersona = async (id) => {
@@ -34,10 +33,8 @@ const subirImagen = (imagen, refStorage) => {
         reject(error);
       },
       () => {
-        tarea.snapshot.ref
-          .getDownLoadURL()
+        tarea.snapshot.ref.getDownloadURL()
           .then((urlImagen) => {
-            console.log(urlImagen);
             resolve(urlImagen);
           })
           .catch((error) => reject(error));
@@ -48,12 +45,64 @@ const subirImagen = (imagen, refStorage) => {
 
 const actualizarPersona = async (id, objPersona) => {
   try {
-    const URI = `${URL}/editar/${id}`;
-    let { data } = await axios.put(URI, {objPersona});
-    return data.content;
+    const URI = `${URL}/editar/${id}/`;
+    let { data } = await axios.put(URI, objPersona);
+    return data;
   } catch (error) {
     return error;
   }
 };
 
-export { informacionPersona, traerPersonas, subirImagen, actualizarPersona };
+const agregarTelefono = async (id, objFono) => {
+  try {
+    const URI = `${URL}/telefono/${id}`;
+    let headers = {
+      "Content-Type": "application/json",
+    };
+    let data = await axios.post(URI, objFono, { headers })
+    return data
+  } catch (error) {
+    return error
+  }
+};
+
+const agregarEstudio = async (id, objEstudio) => {
+  try {
+    const URI = `${URL}/estudio/${id}`;
+    let headers = {
+      "Content-Type": "application/json",
+    };
+    let data = await axios.post(URI, objEstudio, { headers })
+    return data
+  } catch (error) {
+    return error
+  }
+};
+
+const agregarTrabajo = async (id, objTrabajo) => {
+  try {
+    const URI = `${URL}/trabajo/${id}`;
+    let headers = {
+      "Content-Type": "application/json",
+    };
+    let data = await axios.post(URI, objTrabajo, { headers })
+    return data
+  } catch (error) {
+    return error
+  }
+};
+
+const postularAnuncio = async (id, objPostulante) => {
+  try {
+    const URI = `${URL}/postulante/${id}`
+    let headers = {
+      "Content-Type": "application/json",
+    };
+    let postulacion = await axios.post(URI, objPostulante, { headers });
+    return postulacion;
+  } catch (error) {
+    return error;
+  }
+}
+
+export { informacionPersona, traerPersonas, subirImagen, actualizarPersona, agregarTelefono, agregarEstudio, agregarTrabajo, postularAnuncio };
