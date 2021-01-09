@@ -11,7 +11,7 @@ export default function PostulacionesView(props) {
   const token = sessionStorage.getItem("token");
 
   const traerPostulaciones = async () => {
-    let { data } = await traerPostulacionesPersona(id, token);
+    let  data  = await traerPostulacionesPersona(id, token);
     let { content } = data;
     setInformacion(content);
     setCargando(false);
