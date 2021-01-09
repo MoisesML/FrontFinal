@@ -1,11 +1,30 @@
 import axios from 'axios';
 
-// const URL = 'http://127.0.0.1:5000';
 const URL = 'https://projecto-codigo-final.herokuapp.com';
 
 const buscarAnuncios = async (puesto, lugar) => {
     try {
-        const URI = `${URL}/anuncios/keyword/${puesto}`;
+        const URI = `${URL}/busqueda/${puesto}/${lugar}`;
+        let { data } = await axios.get(URI);
+        return data.content;
+    } catch (error) {
+        return error;
+    }
+};
+
+const buscarAnunciosPuesto = async (puesto) => {
+    try {
+        const URI = `${URL}/puesto/${puesto}`;
+        let { data } = await axios.get(URI);
+        return data.content;
+    } catch (error) {
+        return error;
+    }
+};
+
+const buscarAnunciosLugar = async (lugar) => {
+    try {
+        const URI = `${URL}/lugar/${lugar}`;
         let { data } = await axios.get(URI);
         return data.content;
     } catch (error) {
@@ -50,9 +69,22 @@ const traerAnuncio = async (id) => {
     }
 };
 
+const traerAnuncios = async () => {
+    try {
+        const URI = `${URL}/anuncios`;
+        let { data } = await axios.get(URI);
+        return data.content;
+    } catch (error) {
+        return error;
+    }
+};
+
 export {
     buscarAnuncios,
+    buscarAnunciosLugar,
+    buscarAnunciosPuesto,
     anunciosContratados,
     crearAnuncio,
     traerAnuncio,
+    traerAnuncios,
 }

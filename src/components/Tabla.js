@@ -27,8 +27,9 @@ export default function Tabla({ datos, tipo }) {
               ) : tipo === "cv" ? (
                 <Fragment>
                   <th scope="col">#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Estado</th>
                   <th scope="col">CV</th>
-                  <th scope="col">ID</th>
                 </Fragment>
               ) : tipo === "postulaciones" ? (
                 <Fragment>

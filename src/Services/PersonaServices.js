@@ -1,4 +1,4 @@
-import axios from "axios";
+ import axios from "axios";
 
 const URL = "https://projecto-codigo-final.herokuapp.com";
 
@@ -132,6 +132,21 @@ const quitarEstudio = async (id, idEstudio, token) => {
   }
 };
 
+const editarEstudio = async (id, idEstudio, objEstudio, token) => {
+  try {
+    let tokken = "Bearer " + token
+    const URI = `${URL}/estudio/${id}/${idEstudio}`;
+    let headers = {
+      "Content-Type": "application/json",
+      "Authorization":tokken,
+    };
+    let data = await axios.put(URI, objEstudio, { headers })
+    return data
+  } catch (error) {
+    return error;
+  }
+};
+
 const agregarTrabajo = async (id, objTrabajo, token) => {
   try {
     let tokken = "Bearer " + token
@@ -162,6 +177,21 @@ const quitarTrabajo = async (id, idTrabajo, token) => {
   }
 };
 
+const editarTrabajo = async (id, idTrabajo, objTrabajo, token) => {
+  try {
+    let tokken = "Bearer " + token
+    const URI = `${URL}/trabajo/${id}/${idTrabajo}`;
+    let headers = {
+      "Content-Type": "application/json",
+      "Authorization":tokken,
+    };
+    let data = await axios.put(URI, objTrabajo, { headers })
+    return data
+  } catch (error) {
+    return error;
+  }
+};
+
 const postularAnuncio = async (id, objPostulante, token) => {
   try {
     let tokken = "Bearer " + token
@@ -181,6 +211,21 @@ const traerPostulacionesPersona = async (id, token) => {
   try {
     let tokken = "Bearer " + token
     const URI = `${URL}/postulaciones/persona/${id}`
+    let headers = {
+      "Content-Type": "application/json",
+      "Authorization":tokken,
+    };
+    let {data} = await axios.get(URI, { headers });
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const traerPostulacionesAnuncio = async (id, token) => {
+  try {
+    let tokken = "Bearer " + token
+    const URI = `${URL}/postulantes/anuncio/${id}`
     let headers = {
       "Content-Type": "application/json",
       "Authorization":tokken,
@@ -207,4 +252,4 @@ const verificarPostulacion = async (id, idAn, token) => {
   }
 };
 
-export { informacionPersona, traerPersonas, subirImagen, actualizarPersona, agregarTelefono, quitarTelefono, editarTelefono, agregarEstudio, quitarEstudio, agregarTrabajo, quitarTrabajo, postularAnuncio, traerPostulacionesPersona, verificarPostulacion };
+export { informacionPersona, traerPersonas, subirImagen, actualizarPersona, agregarTelefono, quitarTelefono, editarTelefono, agregarEstudio, quitarEstudio, editarEstudio, agregarTrabajo, quitarTrabajo, editarTrabajo, postularAnuncio, traerPostulacionesPersona, traerPostulacionesAnuncio, verificarPostulacion };

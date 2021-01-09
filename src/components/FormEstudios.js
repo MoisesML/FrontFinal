@@ -1,37 +1,78 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { agregarEstudio } from "../Services/PersonaServices";
+import { agregarEstudio, editarEstudio } from "../Services/PersonaServices";
 import Swal from "sweetalert2";
 
-export default function FormEstudios({ id, handleClose, token, setActualizar }) {
-  let { register, handleSubmit } = useForm();
+export default function FormEstudios({ id, handleClose, token, setActualizar, accion, info }) {
+  let { register, handleSubmit, setValue } = useForm();
 
   const cerrarModal = () => {
     handleClose();
   };
 
-  const registrarEstudio = async (objEstudio) => {
-    let { data } = await agregarEstudio(id, objEstudio, token);
-    let { ok, message } = data;
-    if (ok) {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      setActualizar(true)
-    } else {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "error",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+  let traerValores = () => {
+    if (accion === "editar") {
+      let { est_nom, est_nvl, est_inst, est_ini, est_fin } = info;
+      setValue("est_nom", est_nom);
+      setValue("est_nvl", est_nvl);
+      setValue("est_inst", est_inst);
+      setValue("est_ini", est_ini);
+      setValue("est_fin", est_fin);
     }
-    handleClose();
+  };
+
+  useEffect(() => {
+    traerValores();
+    // eslint-disable-next-line
+  }, []);
+
+  const registrarEstudio = async (objEstudio) => {
+    if (accion !== "editar") {
+      let { data } = await agregarEstudio(id, objEstudio, token);
+      let { ok, message } = data;
+      if (ok) {
+        Swal.fire({
+          title: "Actualizar datos",
+          text: message,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setActualizar(true)
+      } else {
+        Swal.fire({
+          title: "Actualizar datos",
+          text: message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+      handleClose();
+    } else {
+      let { _id } = info;
+      let { data } = await editarEstudio(id, _id, objEstudio, token);
+      let { ok, message } = data;
+      if (ok) {
+        Swal.fire({
+          title: "Actualizar estudio",
+          text: message,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setActualizar(true);
+      } else {
+        Swal.fire({
+          title: "Actualizar estudio",
+          text: message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+      handleClose();
+    }
   };
 
   return (
@@ -94,7 +135,7 @@ export default function FormEstudios({ id, handleClose, token, setActualizar }) 
           </div>
           <div className="d-flex justify-content-center mt-4">
             <button type="submit" className="btn btn-primary mx-1">
-              Guardar telefono
+            {accion === "editar" ? "Editar estudio" : "Guardar estudio"}
             </button>
             <button
               type="button"

@@ -13,7 +13,9 @@ export default function Buscador() {
     if (lugar === "") {
       lugar = "all";
     }
-    // console.log(data);
+    if (puesto === "") {
+      puesto = "all";
+    }
     history.push(`/busqueda/${puesto}/${lugar}`);
   };
 
@@ -26,8 +28,7 @@ export default function Buscador() {
             name="puesto"
             type="text"
             placeholder="Puesto, empresa o palabra clave"
-            required="required"
-            ref={register({ required: true })}
+            ref={register({ required: false })}
           />
         </Form.Group>
         <i className="fas fa-map-marker-alt mx-2"></i>

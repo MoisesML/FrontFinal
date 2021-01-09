@@ -16,7 +16,7 @@ export default function CarruselItem({ anun }) {
             <img
               className="d-block w-100 imagen"
               // src="https://play-lh.googleusercontent.com/f35RMXXJjKSlUptfB6DZ9tIqHxEVIS-cszNfZ5fvjHPxnrbgg9hr-KBdIEiUcz1Ba3M"
-              src="https://picsum.photos/seed/picsum/800/800"
+              src="https://firebasestorage.googleapis.com/v0/b/codigo-final.appspot.com/o/personas%2Ffondo_sin_imagen_perfil_usuario.png?alt=media&token=ef2f8f17-b825-42bf-8cc9-c075e2b44df7"
               alt="First slide"
             />
           </div>

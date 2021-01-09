@@ -5,7 +5,7 @@ import { SessionContext } from "../context/SessionContext";
 import { Link } from "react-router-dom";
 import { verificarPostulacion } from "../Services/PersonaServices";
 
-export default function AnuncioInfo({ informacion, idAnuncio }) {
+export default function AnuncioInfo({ informacion, idAnuncio, postulantes }) {
   const {
     user,
     setSessionUser,
@@ -32,10 +32,14 @@ export default function AnuncioInfo({ informacion, idAnuncio }) {
 
   const verificarPost = async () => {
     console.log(id, id !=null)
-    if (id !== null) {
-      let { data } = await verificarPostulacion(id2, idAnuncio, token2);
-      let { ok } = data;
-      setVerificar(ok);
+    if (tipo2 === "persona") {
+      if (id !== null) {
+        let { data } = await verificarPostulacion(id2, idAnuncio, token2);
+        let { ok } = data;
+        setVerificar(ok);
+      } else {
+        console.log("nada")
+      }
     } else {
       console.log("nada")
     }
@@ -68,7 +72,7 @@ export default function AnuncioInfo({ informacion, idAnuncio }) {
         <div>
           <h1 className="mb-3">{anun_psto}</h1>
           {tipo === "empresa" ? (
-            <Tabla datos={anun_post} tipo="cv" />
+            <Tabla datos={postulantes} tipo="cv" />
           ) : (
             // <div>sOY EMPRESA</div>
             <Fragment>
@@ -82,9 +86,11 @@ export default function AnuncioInfo({ informacion, idAnuncio }) {
                   <Fragment>
                     <ModalForm
                       id={id}
+                      idAnuncio={idAnuncio}
                       titulo={"Enviar postulación"}
                       informacion={informacion}
                       tipo={user !== "null" ? "postulacion" : "unlogin"}
+                      setActualizar={setVerificar}
                     />
                   </Fragment>
                 )

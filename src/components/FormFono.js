@@ -3,14 +3,7 @@ import { useForm } from "react-hook-form";
 import { agregarTelefono, editarTelefono } from "../Services/PersonaServices";
 import Swal from "sweetalert2";
 
-export default function FormFono({
-  id,
-  handleClose,
-  token,
-  setActualizar,
-  accion,
-  info,
-}) {
+export default function FormFono({ id, handleClose, token, setActualizar, accion, info }) {
   let { register, handleSubmit, setValue } = useForm();
 
   const cerrarModal = () => {

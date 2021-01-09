@@ -45,28 +45,21 @@ export default function BarNaveg() {
             <Link className="mx-1 hyperv" to="/pruebas">
               pruebas
             </Link>
-            <Link className="mx-1 hyperv" to={"editar/cv/"+id+"/"} >
-              editarcv
-            </Link>
-            <Link className="mx-1 hyperv" to={"admin/postulaciones/"+id+"/"} >
+            <button className="btn btn-primary mx-1 hyperv" onClick={(e) => {
+              let ruta = `/editar/cv/${id}`
+              e.preventDefault();
+              history.push(ruta)
+            }} >
+              Editar CV
+            </button>
+            <button className="btn btn-primary mx-1 hyperv" onClick={(e) => {
+              let ruta2 = `/admin/postulaciones/${id}`
+              e.preventDefault();
+              history.push(ruta2)
+            }} >
               Mis postulaciones
-            </Link>
+            </button>
             <Link className="mx-1 hyperv" to="/anuncio">Anuncio</Link>
-            <NavDropdown
-              title="Dropddsdsown"
-              id="basic-nav-dropdown"
-              className="hyperv"
-            >
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
         <Link to="/login/empresa" className="btn btn-light ml-4">Soy empresa</Link>

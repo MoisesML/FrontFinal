@@ -1,40 +1,78 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { agregarTrabajo } from "../Services/PersonaServices";
+import { agregarTrabajo, editarTrabajo } from "../Services/PersonaServices";
 import Swal from "sweetalert2";
 
-export default function FormTrabajo({ id, handleClose, token, setActualizar }) {
-  let { register, handleSubmit } = useForm();
+export default function FormTrabajo({ id, handleClose, token, setActualizar, accion, info }) {
+  let { register, handleSubmit, setValue } = useForm();
 
   const cerrarModal = () => {
     handleClose();
   };
 
-  const registrarTrabajo = async (objTrabajo) => {
-    console.log(objTrabajo);
-    let { trab_func } = objTrabajo;
-    console.log(trab_func, typeof trab_func);
-    let { data } = await agregarTrabajo(id, objTrabajo, token);
-    let { ok, message } = data;
-    if (ok) {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      setActualizar(true)
-    } else {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "error",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+  let traerValores = () => {
+    if (accion === "editar") {
+      let { trab_pue, trab_emp, trab_ini, trab_fin, trab_func } = info;
+      setValue("trab_pue", trab_pue);
+      setValue("trab_emp", trab_emp);
+      setValue("trab_ini", trab_ini);
+      setValue("trab_fin", trab_fin);
+      setValue("trab_func", trab_func);
     }
+  };
+
+  useEffect(() => {
+    traerValores();
+    // eslint-disable-next-line
+  }, []);
+
+  const registrarTrabajo = async (objTrabajo) => {
+    if (accion !== "editar") {
+      let { data } = await agregarTrabajo(id, objTrabajo, token);
+      let { ok, message } = data;
+      if (ok) {
+        Swal.fire({
+          title: "Agregar trabajo",
+          text: message,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setActualizar(true)
+      } else {
+        Swal.fire({
+          title: "Agregar trabajo",
+          text: message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
     handleClose();
+    } else {
+      let { _id } = info;
+      let { data } = await editarTrabajo(id, _id, objTrabajo, token);
+      let { ok, message } = data;
+      if (ok) {
+        Swal.fire({
+          title: "Actualizar trabajo",
+          text: message,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setActualizar(true);
+      } else {
+        Swal.fire({
+          title: "Actualizar trabajo",
+          text: message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+      handleClose();
+    }
   };
 
   return (

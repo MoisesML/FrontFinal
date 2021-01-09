@@ -6,7 +6,7 @@ import FormEstudios from "./FormEstudios";
 import FormTrabajo from "./FormTrabajo";
 import FormPostulacion from "./FormPostulacion";
 
-export default function ModalForm({ id, titulo, tipo, setActualizar, accion, info, informacion }) {
+export default function ModalForm({ id, titulo, tipo, setActualizar, accion, info, informacion, idAnuncio }) {
   const token = sessionStorage.getItem("token");
   const [show, setShow] = useState(false);
 
@@ -45,6 +45,7 @@ export default function ModalForm({ id, titulo, tipo, setActualizar, accion, inf
               token={token}
               setActualizar={setActualizar}
               accion={accion}
+              info={info}
             />
           ) : tipo === "trabajo" ? (
             <FormTrabajo
@@ -53,10 +54,12 @@ export default function ModalForm({ id, titulo, tipo, setActualizar, accion, inf
               token={token}
               setActualizar={setActualizar}
               accion={accion}
+              info={info}
             />
           ) : tipo === "postulacion" ? (
             <FormPostulacion
               id={id}
+              idAnuncio={idAnuncio}
               informacion={informacion}
               handleClose={handleClose}
               token={token}

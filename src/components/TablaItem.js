@@ -12,20 +12,29 @@ export default function TablaItem({ key, dato, tipo }) {
       anun_esta,
       anun_post,
       anun_psto,
+      anun_inic,
+      anun_fin,
       _id,
     } = dato;
     const detalle = `/anuncio/detalle/${_id}`;
     const postulantes = anun_post.length;
-    console.log(key);
+    var date_1 = new Date(anun_inic);
+    var date_2 = new Date(anun_fin);
+
+    var day_as_milliseconds = 86400000;
+    var diff_in_millisenconds = date_2 - date_1;
+    var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
+
+    console.log(diff_in_days);
 
     return (
       <tr>
         <th scope="row">{key}</th>
         <td>{anun_psto}</td>
-        <td>{anun_desc.slice(0,20)}</td>
+        <td>{anun_desc.slice(0, 20)}</td>
         <td>{postulantes}</td>
         <td>{anun_esta === "true" ? "Activo" : "Finalizado"}</td>
-        <td>{anun_cont}</td>
+        <td>{diff_in_days} dias</td>
         <td>
           <button className="btn btn-primary">
             <Link to={detalle}>Ver detalle</Link>
@@ -34,15 +43,26 @@ export default function TablaItem({ key, dato, tipo }) {
       </tr>
     );
   } else if (tipo === "cv") {
-    let { post_cv, post_id } = dato;
+    let { post_cuvi, post_nmPe, post_esta } = dato;
     // const detalle = `/anuncio/detalle/${_id}`;
-    console.log(key);
+    let estado =
+      post_esta === "Postulacion Enviada"
+        ? "Postulacion recibida"
+        : "En otra fase";
+    let Enlace = post_cuvi ? (
+      <a href={post_cuvi} target="_blank">
+        ver CV
+      </a>
+    ) : (
+      "No hay cv"
+    );
 
     return (
       <tr>
         <th scope="row">{key}</th>
-        <td>{post_cv}</td>
-        <td>{post_id}</td>
+        <td>{post_nmPe}</td>
+        <td>{estado}</td>
+        <td>{Enlace}</td>
       </tr>
     );
   } else if (tipo === "postulaciones") {

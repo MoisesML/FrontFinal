@@ -1,18 +1,16 @@
 import React from "react";
 import "./css/CVItem.css";
-import {
-  quitarTelefono,
-  quitarEstudio,
-  quitarTrabajo,
-} from "../Services/PersonaServices";
+import { quitarTelefono, quitarEstudio, quitarTrabajo } from "../Services/PersonaServices";
 import Swal from "sweetalert2";
 import ModalForm from "./ModalForm";
 
 export default function CVItem({ dato, tipo, setActualizar }) {
   let id = sessionStorage.getItem("id");
   let token = sessionStorage.getItem("token");
+
   if (tipo === "fono") {
     let { _id, fono_num, fono_ope, fono_sta } = dato;
+
     if (fono_sta === "true") {
       const eliminarFono = () => {
         Swal.fire({
@@ -119,9 +117,7 @@ export default function CVItem({ dato, tipo, setActualizar }) {
           <div className="d-flex justify-content-between">
             <h4>{est_nom}</h4>
             <div>
-              <button className="btn btn-primary mx-1">
-                <i className="fas fa-pen"></i>
-              </button>
+              <ModalForm id={id} titulo={"Agregar estudio"} tipo="estudio" setActualizar={setActualizar} accion="editar" info={dato}/>
               <button className="btn btn-danger mx-1" onClick={eliminarEstudio}>
                 <i className="fas fa-trash-alt"></i>
               </button>
@@ -149,15 +145,7 @@ export default function CVItem({ dato, tipo, setActualizar }) {
       return null;
     }
   } else if (tipo === "trabajo") {
-    let {
-      _id,
-      trab_pue,
-      trab_emp,
-      trab_ini,
-      trab_fin,
-      trab_func,
-      trab_sta,
-    } = dato;
+    let { _id, trab_pue, trab_emp, trab_ini, trab_fin, trab_func, trab_sta } = dato;
 
     if (trab_sta === "true") {
       const eliminarTrabajo = () => {
@@ -200,9 +188,7 @@ export default function CVItem({ dato, tipo, setActualizar }) {
           <div className="d-flex justify-content-between">
             <h4>{trab_pue}</h4>
             <div>
-              <button className="btn btn-primary mx-1">
-                <i className="fas fa-pen"></i>
-              </button>
+              <ModalForm id={id} titulo={"Agregar trabajo"} tipo="trabajo" setActualizar={setActualizar} accion="editar" info={dato}/>
               <button className="btn btn-danger mx-1" onClick={eliminarTrabajo}>
                 <i className="fas fa-trash-alt"></i>
               </button>
