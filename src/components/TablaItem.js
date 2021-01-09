@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function TablaItem({ key, dato, tipo }) {
   if (tipo === "anuncio") {
     let {
-      anun_cont,
+      // anun_cont,
       anun_desc,
       // anun_emId,
       // anun_empr,
@@ -50,7 +50,7 @@ export default function TablaItem({ key, dato, tipo }) {
         ? "Postulacion recibida"
         : "En otra fase";
     let Enlace = post_cuvi ? (
-      <a href={post_cuvi} target="_blank">
+      <a href={post_cuvi} target="_blank" rel="noreferrer">
         ver CV
       </a>
     ) : (
