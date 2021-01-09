@@ -63,7 +63,7 @@ export default function AnuncioInfo({ informacion, idAnuncio, postulantes }) {
       anun_empr,
       // anun_esco,
       // anun_esta,
-      anun_post,
+      // anun_post,
       anun_psto,
     } = informacion;
 
