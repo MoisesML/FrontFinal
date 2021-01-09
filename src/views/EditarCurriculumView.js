@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { SessionContext } from "../context/SessionContext";
 import FormCv from "../components/FormCv";
-import { informacionPersona, actualizarPersona, agregarTelefono } from "../Services/PersonaServices";
+import { informacionPersona, actualizarPersona } from "../Services/PersonaServices";
 import Swal from "sweetalert2";
 
 export default function EditarCurriculumView(props) {
@@ -61,29 +61,29 @@ export default function EditarCurriculumView(props) {
     }
   };
 
-  const agregarFono = async (idx, objFono) => {
-    let { data } = await agregarTelefono(idx, objFono);
-    let { ok, message } = data;
-    if (ok) {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      return history.push("/admin");
-    } else {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "error",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-    }
-    console.log(data)
-  }
+  // const agregarFono = async (idx, objFono) => {
+  //   let { data } = await agregarTelefono(idx, objFono);
+  //   let { ok, message } = data;
+  //   if (ok) {
+  //     Swal.fire({
+  //       title: "Actualizar datos",
+  //       text: message,
+  //       icon: "success",
+  //       showConfirmButton: false,
+  //       timer: 2000,
+  //     });
+  //     return history.push("/admin");
+  //   } else {
+  //     Swal.fire({
+  //       title: "Actualizar datos",
+  //       text: message,
+  //       icon: "error",
+  //       showConfirmButton: false,
+  //       timer: 2000,
+  //     });
+  //   }
+  //   console.log(data)
+  // }
 
   useEffect(() => {
     verificarContext();

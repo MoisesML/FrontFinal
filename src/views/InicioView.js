@@ -25,7 +25,7 @@ export default function InicioView() {
     console.log(anuncios)
     if (anuncios === null) {
       setAnuncios([null]);
-    } else if (anuncios == "Error") {
+    } else if (anuncios === "Error") {
       console.log("sucedio un error")
     } else {
       setAnuncios(anuncios);

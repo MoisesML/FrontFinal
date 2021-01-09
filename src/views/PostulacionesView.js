@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import Loading from "../components/Loading";
 import Tabla from "../components/Tabla";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { traerPostulacionesPersona } from "../Services/PersonaServices";
 
 export default function PostulacionesView(props) {
@@ -20,6 +20,7 @@ export default function PostulacionesView(props) {
 
   useEffect(() => {
     traerPostulaciones();
+    // eslint-disable-next-line
   }, []);
 
   return (

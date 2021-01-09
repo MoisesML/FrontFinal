@@ -10,7 +10,7 @@ export default function CrearAnuncioView() {
     user,
     id,
     setId,
-    tipo,
+    // tipo,
     setTipo,
     setSessionUser,
     setNombreCompleto,

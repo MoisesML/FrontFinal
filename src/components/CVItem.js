@@ -13,7 +13,7 @@ export default function CVItem({ dato, tipo, setActualizar }) {
   let token = sessionStorage.getItem("token");
   if (tipo === "fono") {
     let { _id, fono_num, fono_ope, fono_sta } = dato;
-    if (fono_sta == "true") {
+    if (fono_sta === "true") {
       const eliminarFono = () => {
         Swal.fire({
           icon: "danger",
@@ -78,7 +78,7 @@ export default function CVItem({ dato, tipo, setActualizar }) {
   } else if (tipo === "estudio") {
     let { _id, est_nom, est_nvl, est_inst, est_ini, est_fin, est_sta } = dato;
 
-    if (est_sta == "true") {
+    if (est_sta === "true") {
       const eliminarEstudio = () => {
         Swal.fire({
           icon: "danger",
@@ -159,7 +159,7 @@ export default function CVItem({ dato, tipo, setActualizar }) {
       trab_sta,
     } = dato;
 
-    if (trab_sta == "true") {
+    if (trab_sta === "true") {
       const eliminarTrabajo = () => {
         Swal.fire({
           icon: "danger",
