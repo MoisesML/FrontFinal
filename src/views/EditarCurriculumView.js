@@ -2,9 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { SessionContext } from "../context/SessionContext";
 import FormCv from "../components/FormCv";
-import FormFono from "../components/FormFono";
-import FormEstudios from '../components/FormEstudios';
-import FormTrabajo from '../components/FormTrabajo';
 import { informacionPersona, actualizarPersona, agregarTelefono } from "../Services/PersonaServices";
 import Swal from "sweetalert2";
 
@@ -42,7 +39,7 @@ export default function EditarCurriculumView(props) {
   };
 
   const Actualizar = async (idx, objPersona) => {
-    let data = await actualizarPersona(idx, objPersona);
+    let data = await actualizarPersona(idx, objPersona, token2);
     let { message, ok } = data;
     if (ok) {
       Swal.fire({
@@ -98,9 +95,6 @@ export default function EditarCurriculumView(props) {
     <div className="container">
       <h2>Actualizar Curriculum</h2>
       <FormCv informacion={informacion} Actualizar={Actualizar} id={idx}/>
-      <FormFono agregarFono={agregarFono} id={idx}/>
-      <FormEstudios id={idx}/>
-      <FormTrabajo id={idx}/>
     </div>
   );
 }

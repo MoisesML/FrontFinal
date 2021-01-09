@@ -10,7 +10,7 @@ export default function FormRegister({ Registrar, tipo }) {
         per_dni: "",
         per_fnac: "",
         per_dire: "",
-        per_img: "",
+        per_img: "https://firebasestorage.googleapis.com/v0/b/codigo-final.appspot.com/o/personas%2Ffondo_sin_imagen_perfil_usuario.png?alt=media&token=ef2f8f17-b825-42bf-8cc9-c075e2b44df7"
       };
       let objPersona = { ...data, ...objAdicional };
       console.log(objPersona);
@@ -21,7 +21,7 @@ export default function FormRegister({ Registrar, tipo }) {
     return (
       <Fragment>
         <div className="d-flex flex-column align-items-center mb-4">
-          <div>Registrate</div>
+          <h3>Crea tu cuenta personal y postula al trabajo que deseas</h3>
         </div>
         <div className="row justify-content-center">
           <form id="crear" className="col-8" onSubmit={handleSubmit(Register)}>
@@ -81,8 +81,9 @@ export default function FormRegister({ Registrar, tipo }) {
 
     return (
       <div className="container">
+        <h3 className="text-center">Cree su cuenta corporativa y anuncie sus ofertas laborales</h3>
         <div className="row justify-content-center">
-          <form className="col-sm-6" onSubmit={handleSubmit(Register)}>
+          <form className="col-sm-9" onSubmit={handleSubmit(Register)}>
             <div className="form-group">
               <label>Nombre empresa</label>
               <input
@@ -90,26 +91,6 @@ export default function FormRegister({ Registrar, tipo }) {
                 className="form-control"
                 name="emp_nomb"
                 placeholder="Ingrese su nombre"
-                ref={register({ required: true })}
-              />
-            </div>
-            <div className="form-group">
-              <label>Razon Social</label>
-              <input
-                type="text"
-                className="form-control"
-                name="emp_rsoc"
-                placeholder="Ingrese su apellido"
-                ref={register({ required: true })}
-              />
-            </div>
-            <div className="form-group">
-              <label>RUC</label>
-              <input
-                type="text"
-                className="form-control"
-                name="emp_ruc"
-                placeholder="Ingrese su correo"
                 ref={register({ required: true })}
               />
             </div>

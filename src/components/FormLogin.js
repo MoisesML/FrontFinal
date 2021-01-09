@@ -15,7 +15,7 @@ export default function FormLogin({Ingresar, IngresarEmpresa, tipo}) {
   return (
     <Fragment>
       <div className="d-flex flex-column align-items-center mb-4">
-        <div>Ingrese a su cuenta</div>
+        <h3 className="mb-3">Ingrese a su cuenta</h3>
         <i className="fas fa-user fa-9x"></i>
       </div>
       <div className="row justify-content-center">

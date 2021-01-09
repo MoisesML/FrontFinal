@@ -1,23 +1,47 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 import { useForm } from "react-hook-form";
-import { agregarEstudio } from '../Services/PersonaServices';
+import { agregarEstudio } from "../Services/PersonaServices";
+import Swal from "sweetalert2";
 
-export default function FormEstudios({id}) {
+export default function FormEstudios({ id, handleClose, token, setActualizar }) {
   let { register, handleSubmit } = useForm();
 
-  const registrarEstudio = async (objEstudio) => {
-    console.log(objEstudio)
-    let estudio = await agregarEstudio(id, objEstudio)
-    console.log(estudio)
+  const cerrarModal = () => {
+    handleClose();
   };
 
-    return (
-        <Fragment>
-      <div className="d-flex flex-column align-items-center mb-4">
-        <div>Registrar estudios realizados</div>
-      </div>
+  const registrarEstudio = async (objEstudio) => {
+    let { data } = await agregarEstudio(id, objEstudio, token);
+    let { ok, message } = data;
+    if (ok) {
+      Swal.fire({
+        title: "Actualizar datos",
+        text: message,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      setActualizar(true)
+    } else {
+      Swal.fire({
+        title: "Actualizar datos",
+        text: message,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
+    handleClose();
+  };
+
+  return (
+    <Fragment>
       <div className="row justify-content-center">
-        <form id="crear" className="col-8" onSubmit={handleSubmit(registrarEstudio)}>
+        <form
+          id="crear"
+          className="col-8"
+          onSubmit={handleSubmit(registrarEstudio)}
+        >
           <div className="form-group">
             <label>Título obtenido</label>
             <input
@@ -68,11 +92,21 @@ export default function FormEstudios({id}) {
               ref={register({ required: true })}
             />
           </div>
-          <button className="btn btn-primary align-self-center" type="submit">
-            Registrar
-          </button>
+          <div className="d-flex justify-content-center mt-4">
+            <button type="submit" className="btn btn-primary mx-1">
+              Guardar telefono
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary mx-1"
+              data-bs-dismiss="modal"
+              onClick={cerrarModal}
+            >
+              Cancelar
+            </button>
+          </div>
         </form>
       </div>
     </Fragment>
-    )
+  );
 }

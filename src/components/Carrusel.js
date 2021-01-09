@@ -14,4 +14,4 @@ export default function Carrusel({ anuncios }) {
       })}
     </Carousel>
   );
-} 
+}

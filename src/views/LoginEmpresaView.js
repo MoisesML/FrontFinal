@@ -14,6 +14,7 @@ export default function LoginEmpresaView() {
 
   const Ingresar = async (objPersona) => {
     let { data } = await loginEmpresa(objPersona);
+    console.log(data)
     let { message, ok, content } = data;
     
     if (ok) {

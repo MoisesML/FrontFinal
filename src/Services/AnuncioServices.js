@@ -23,12 +23,16 @@ const anunciosContratados = async () => {
     }
 };
 
-const crearAnuncio = async (objAnuncio) => {
+const crearAnuncio = async (objAnuncio, token) => {
+    console.log(token)
     try {
+        let tokken = "Bearer " + token
         const URI = `${URL}/crear/anuncio`;
         let headers = {
             "Content-Type":"application/json",
+            "Authorization":tokken,
         };
+        console.log(headers)
         let { data } = await axios.post(URI, objAnuncio, { headers });
         return data
     } catch (error) {

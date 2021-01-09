@@ -1,40 +1,83 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import { agregarTelefono } from "../Services/PersonaServices";
+import { agregarTelefono, editarTelefono } from "../Services/PersonaServices";
 import Swal from "sweetalert2";
 
-export default function FormFono({ id, cerrar }) {
-  let { register, handleSubmit } = useForm();
-  const history = useHistory();
+export default function FormFono({
+  id,
+  handleClose,
+  token,
+  setActualizar,
+  accion,
+  info,
+}) {
+  let { register, handleSubmit, setValue } = useForm();
 
-  // const insertarFono = (objFonos) => {
-  //   console.log(id, objFonos);
-  //   agregarFono(id, objFonos);
-  // };
+  const cerrarModal = () => {
+    handleClose();
+  };
+
+  let traerValores = () => {
+    if (accion === "editar") {
+      let { fono_num, fono_ope } = info;
+      setValue("fono_num", fono_num);
+      setValue("fono_ope", fono_ope);
+    }
+  };
+
+  useEffect(() => {
+    traerValores();
+    // eslint-disable-next-line
+  }, []);
 
   const agregarFono = async (objFono) => {
-    let { data } = await agregarTelefono(id, objFono);
-    let { ok, message } = data;
-    if (ok) {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      history.push("/admin");
+    if (accion !== "editar") {
+      let { data } = await agregarTelefono(id, objFono, token);
+      let { ok, message } = data;
+      if (ok) {
+        Swal.fire({
+          title: "Agregar telefono",
+          text: message,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setActualizar(true);
+      } else {
+        Swal.fire({
+          title: "Agregar telefono",
+          text: message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+      handleClose();
     } else {
-      Swal.fire({
-        title: "Actualizar datos",
-        text: message,
-        icon: "error",
-        showConfirmButton: false,
-        timer: 2000,
-      });
+      let { _id } = info;
+      let { data } = await editarTelefono(id, _id, objFono, token);
+      let { ok, message } = data;
+      if (ok) {
+        Swal.fire({
+          title: "Actualizar telefono",
+          text: message,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setActualizar(true);
+      } else {
+        Swal.fire({
+          title: "Actualizar telefono",
+          text: message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+      handleClose();
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -62,13 +105,14 @@ export default function FormFono({ id, cerrar }) {
             />
           </div>
           <div className="d-flex justify-content-center mt-4">
-            <button type="submit" className="btn btn-primary mx-1" >
-              Guardar telefono
+            <button type="submit" className="btn btn-primary mx-1">
+              {accion === "editar" ? "Editar telefono" : "Guardar telefono"}
             </button>
             <button
               type="button"
               className="btn btn-secondary mx-1"
               data-bs-dismiss="modal"
+              onClick={cerrarModal}
             >
               Cancelar
             </button>

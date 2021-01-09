@@ -11,6 +11,7 @@ import PruebasView from './views/PruebasView'
 import RegistroView from './views/RegistroView'
 import ResultadoView from './views/ResultadoView'
 import DetalleAnuncioView from './views/DetalleAnuncioView'
+import PostulacionesView from './views/PostulacionesView'
 
 export default function routes() {
     return (
@@ -25,6 +26,7 @@ export default function routes() {
             <Route exact path='/login/empresa' component={LoginEmpresaView} />
             <Route exact path='/anuncio' component={CrearAnuncioView} />
             <Route exact path='/anuncio/detalle/:id' component={DetalleAnuncioView} />
+            <Route exact path='/admin/postulaciones/:id' component={PostulacionesView} />
         </Fragment>
     )
 }

@@ -14,6 +14,7 @@ export default function LoginView() {
 
   const Ingresar = async (objPersona) => {
     let { data } = await loginPersona(objPersona);
+    console.log(data)
     let { message, ok, content } = data;
 
     if (ok) {

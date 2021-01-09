@@ -48,6 +48,9 @@ export default function BarNaveg() {
             <Link className="mx-1 hyperv" to={"editar/cv/"+id+"/"} >
               editarcv
             </Link>
+            <Link className="mx-1 hyperv" to={"admin/postulaciones/"+id+"/"} >
+              Mis postulaciones
+            </Link>
             <Link className="mx-1 hyperv" to="/anuncio">Anuncio</Link>
             <NavDropdown
               title="Dropddsdsown"
@@ -74,7 +77,7 @@ export default function BarNaveg() {
           </Link>
         ) : (
           <Dropdown as={ButtonGroup}>
-            <Button className="ml-4" variant="success"><Link to="/admin">{nombreCompleto}</Link></Button>
+            <Button className="ml-4" variant="success"><Link className="nombreUsuario" to="/admin">{nombreCompleto}</Link></Button>
             <Dropdown.Toggle
               split
               variant="success"

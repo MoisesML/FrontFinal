@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import "./css/Buscador.css"
 
 export default function Buscador() {
   let { register, handleSubmit } = useForm();
@@ -17,8 +18,8 @@ export default function Buscador() {
   };
 
   return (
-    <div className="mb-4">
-      <Form onSubmit={handleSubmit(Buscar)} inline>
+    <div className="py-3">
+      <Form onSubmit={handleSubmit(Buscar)} inline className="p-3 buscador">
         <i className="fas fa-search mx-2"></i>
         <Form.Group controlId="formBasicEmail" className="mx-2">
           <Form.Control

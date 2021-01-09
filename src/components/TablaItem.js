@@ -22,7 +22,7 @@ export default function TablaItem({ key, dato, tipo }) {
       <tr>
         <th scope="row">{key}</th>
         <td>{anun_psto}</td>
-        <td>{anun_desc}</td>
+        <td>{anun_desc.slice(0,20)}</td>
         <td>{postulantes}</td>
         <td>{anun_esta === "true" ? "Activo" : "Finalizado"}</td>
         <td>{anun_cont}</td>
@@ -43,6 +43,23 @@ export default function TablaItem({ key, dato, tipo }) {
         <th scope="row">{key}</th>
         <td>{post_cv}</td>
         <td>{post_id}</td>
+      </tr>
+    );
+  } else if (tipo === "postulaciones") {
+    let { post_empr, post_esta, post_psto, post_idAn } = dato;
+    const detalle = `/detalle/postulacion/${post_idAn}`;
+
+    return (
+      <tr>
+        <th scope="row">{key}</th>
+        <td>{post_psto}</td>
+        <td>{post_empr}</td>
+        <td>{post_esta}</td>
+        <td>
+          <button className="btn btn-primary">
+            <Link to={detalle}>Ver detalle</Link>
+          </button>
+        </td>
       </tr>
     );
   }

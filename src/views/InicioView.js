@@ -22,7 +22,14 @@ export default function InicioView() {
 
   const getAnuncios = async () => {
     let anuncios = await anunciosContratados();
-    setAnuncios(anuncios);
+    console.log(anuncios)
+    if (anuncios === null) {
+      setAnuncios([null]);
+    } else if (anuncios == "Error") {
+      console.log("sucedio un error")
+    } else {
+      setAnuncios(anuncios);
+    };
     setCargando(false);
   };
 
@@ -50,6 +57,7 @@ export default function InicioView() {
   return (
     <Fragment>
       {cargando ? <Loading /> : <FirstSeccion informacion={anuncios} />}
+      <div>Hola</div>
     </Fragment>
   );
 }

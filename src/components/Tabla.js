@@ -30,6 +30,14 @@ export default function Tabla({ datos, tipo }) {
                   <th scope="col">CV</th>
                   <th scope="col">ID</th>
                 </Fragment>
+              ) : tipo === "postulaciones" ? (
+                <Fragment>
+                  <th scope="col">#</th>
+                  <th scope="col">Puesto</th>
+                  <th scope="col">Empresa</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Detalle</th>
+                </Fragment>
               ) : (
                 "No hay tipo de info"
               )}
